@@ -63,11 +63,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CheckGround.cs" />
-    <Compile Include="Assets\ballController.cs" />
+    <Compile Include="Assets\scripts\BulletController.cs" />
+    <Compile Include="Assets\scripts\BulletController2.cs" />
     <Compile Include="Assets\scripts\ButtonController.cs" />
     <Compile Include="Assets\scripts\Enemy1GeneratorController.cs" />
+    <Compile Include="Assets\scripts\EnemyController2.cs" />
     <Compile Include="Assets\scripts\GameController.cs" />
     <Compile Include="Assets\scripts\LifeController.cs" />
+    <Compile Include="Assets\scripts\ballController.cs" />
     <Compile Include="Assets\scripts\enemyController.cs" />
     <Compile Include="Assets\scripts\playerController.cs" />
     <Reference Include="Unity.Timeline.Editor">

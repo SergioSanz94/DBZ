@@ -14,17 +14,14 @@ public class CheckGround : MonoBehaviour
 
     public void OnCollisionStay2D(Collision2D col)
     {
-        if(col.gameObject.tag == "Plataforma")
-        {
-            player.grounded = true;
-        }
+        
       
     }
     private void OnCollisionExit2D(Collision2D col)
     {
         if(col.gameObject.tag == "Plataforma")
         {
-            player.grounded = false;
+           
         }
        
     }

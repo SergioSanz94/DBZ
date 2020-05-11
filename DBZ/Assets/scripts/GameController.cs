@@ -11,10 +11,10 @@ public class GameController : MonoBehaviour
     public GameObject uiIdle;
     public GameObject uiGOver;
     public GameObject player;
-
+    public GameObject game;
     public enum GameState { Idle, Playing, GameOver};
     public GameState gameState = GameState.Idle;
-
+    public GameObject EnemyGenertor2;
     public GameObject EnemyGenertor;
     // Start is called before the first frame update
     void Start()
@@ -25,13 +25,17 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Empieza el juego
         if (gameState == GameState.Idle && (Input.GetKeyDown("up") || Input.GetMouseButtonDown(0)))
         {
             gameState = GameState.Playing;
             uiIdle.SetActive(false);
             player.SendMessage("UpdateState", "PlayerRun");
-           // EnemyGenertor.SendMessage("StartGenerator1");
+            EnemyGenertor.SendMessage("StartGenerator1");
+            EnemyGenertor2.SendMessage("StartGenerator1");
+            game.gameObject.GetComponent<Canvas>().sortingOrder = 0;
+           
         }
         else if(gameState == GameState.Playing) //Juego en marcha
         {
@@ -49,4 +53,5 @@ public class GameController : MonoBehaviour
         Background.uvRect = new Rect(Background.uvRect.x + finalSpeed, 0f, 1f, 1f);
         platform.uvRect = new Rect(platform.uvRect.x + finalSpeed * 4, 0f, 1f, 1f);
     }
+   
 }

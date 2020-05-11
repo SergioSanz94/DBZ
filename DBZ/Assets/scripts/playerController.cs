@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
     public float contador = 0;
-    public GameObject Player;
+    public GameObject enemy;
     public GameObject life;
     public GameObject uiGOver;
     private Animator animator;
-    public bool grounded = false;
     public GameObject bolaki;
     public GameObject button;
+    public Text energyText;
+    public int energy = 0;
     private Transform _firePoint;
 
    void Awake()
     {
+      
         _firePoint = transform.Find("FirePoint");
     }
     // Start is called before the first frame update
@@ -23,21 +26,21 @@ public class playerController : MonoBehaviour
     {
 
         animator = GetComponent<Animator>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (grounded == true && Input.GetMouseButtonDown(0))
-        //{
 
-       //     UpdateState("GohanSalto");
-       //  grounded = false;
-
-       //}
-       if(animator.GetBool("Attack") == true)
+        if(animator.GetBool("KameAttack") == true)
         {
+            Invoke("kameShoot", 3f);
+            animator.SetBool("KameAttack", false);
+        }
+
+        if (animator.GetBool("Attack") == true)
+        {
+
             Invoke("Shoot",0.5f);
             animator.SetBool("Attack", false);
         }
@@ -45,19 +48,19 @@ public class playerController : MonoBehaviour
     }
     void Shoot()
     {
-       // if(bolaki !=null && _firePoint != null && Player !=null)
-        //{
+   
             GameObject myBall = Instantiate(bolaki, _firePoint.position, Quaternion.identity);
             ballController BallComponent = myBall.GetComponent<ballController>();
-           
-        //}
+
     }
+
+   
     public void UpdateState(string state = null)
     {
         if(state != null)
         {
             animator.Play(state);
-            grounded = false;
+            
         }
     }
     public void UpdateAttack(string attack = null)
@@ -68,16 +71,13 @@ public class playerController : MonoBehaviour
            
         }
     }
+  
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Plataforma")
+       
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet")
         {
-            grounded = true;
-           
-        }
-      
-        if (other.gameObject.tag == "Enemy")
-        {
+            
             UpdateState("PlayerDamage");
             contador++;
             
@@ -94,7 +94,7 @@ public class playerController : MonoBehaviour
             }
         }
         
-        
+      
 
     }
 }
