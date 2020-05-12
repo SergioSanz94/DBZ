@@ -16,10 +16,21 @@ public class GameController : MonoBehaviour
     public GameState gameState = GameState.Idle;
     public GameObject EnemyGenertor2;
     public GameObject EnemyGenertor;
+
+
+    public AudioClip fondo;
+    public AudioClip die;
+
+    AudioSource musicPlayer;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         uiGOver.SetActive(false);
+
+       musicPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +47,9 @@ public class GameController : MonoBehaviour
             EnemyGenertor2.SendMessage("StartGenerator1");
             game.gameObject.GetComponent<Canvas>().sortingOrder = 0;
            
+            musicPlayer.clip = fondo;
+            musicPlayer.Play();
+
         }
         else if(gameState == GameState.Playing) //Juego en marcha
         {
@@ -44,6 +58,9 @@ public class GameController : MonoBehaviour
         else if (uiGOver.active == true)
         {
             gameState = GameState.GameOver;
+            musicPlayer.Stop();
+            musicPlayer.clip = die;
+            musicPlayer.Play();
         }
         
     }
