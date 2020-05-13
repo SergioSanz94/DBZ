@@ -24,7 +24,7 @@ public class EnemyController2 : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = Vector2.left * velocity;
         animator = GetComponent<Animator>();
-        InvokeRepeating("Shoot", 1f, 3f);
+        InvokeRepeating("Shoot", 2f, 4f);
         InvokeRepeating("Fast", 1f, 3f);
 
     }

@@ -9,7 +9,7 @@ public class Enemy1GeneratorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Fast", 1f, 1f);
+    
     }
 
     // Update is called once per frame
@@ -29,8 +29,5 @@ public class Enemy1GeneratorController : MonoBehaviour
     {
         CancelInvoke("CreateEnemy1");
     }
-    void Fast()
-    {
-        generatorTimer = generatorTimer - 0.5f;
-    }
+   
 }

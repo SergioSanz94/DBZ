@@ -11,11 +11,6 @@ public class enemyController : MonoBehaviour
     public GameObject bullet;
     private Transform _firePoint;
     
-
-    public AudioClip bullet2;
-    public AudioClip EnemyDie;
-    AudioSource bullet2Player;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,10 +24,9 @@ public class enemyController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = Vector2.left * velocity;
         animator = GetComponent<Animator>();
-        InvokeRepeating("Shoot", 1f, 3f);
+        InvokeRepeating("Shoot", 1f, 3.5f);
         InvokeRepeating("Fast", 1f, 3f);
         
-        bullet2Player = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -56,9 +50,6 @@ public class enemyController : MonoBehaviour
         BulletController bulletComponent = myBullet.GetComponent<BulletController>();
         bulletComponent.direction = Vector2.left;
 
-        bullet2Player.clip = bullet2;
-        bullet2Player.Play();
-
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -69,12 +60,10 @@ public class enemyController : MonoBehaviour
         }
         if (other.gameObject.tag == "Ball")
         {
-            //animator.SetBool("die", true); 
+           
             UpdateState("EnemyDie1");
             Invoke("Kill", 0.5f);
             
-            bullet2Player.clip = EnemyDie;
-            bullet2Player.Play();
         }
 
         if (other.gameObject.tag == "Destroyer" )
