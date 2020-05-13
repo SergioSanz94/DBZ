@@ -11,6 +11,10 @@ public class EnemyController2 : MonoBehaviour
     public GameObject bullet;
     private Transform _firePoint;
 
+    //audio
+    public AudioClip bullet3;
+    AudioSource bullet3Player;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,6 +30,8 @@ public class EnemyController2 : MonoBehaviour
         animator = GetComponent<Animator>();
         InvokeRepeating("Shoot", 2f, 4f);
         InvokeRepeating("Fast", 1f, 3f);
+
+        bullet3Player = GetComponent<AudioSource>();
 
     }
 
@@ -49,6 +55,9 @@ public class EnemyController2 : MonoBehaviour
         GameObject myBullet = Instantiate(bullet, _firePoint.position, Quaternion.identity);
         BulletController2 bulletComponent = myBullet.GetComponent<BulletController2>();
         bulletComponent.direction = new Vector2(-2,-1);
+
+        bullet3Player.clip = bullet3;
+        bullet3Player.Play();
        
     }
     private void OnTriggerEnter2D(Collider2D other)

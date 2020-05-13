@@ -14,6 +14,9 @@ public class playerController : MonoBehaviour
     public GameObject bolaki;
     public GameObject button;
     private Transform _firePoint;
+// audio
+    public AudioClip daño;
+    AudioSource dañoPlayer;
 
    void Awake()
     {
@@ -23,6 +26,7 @@ public class playerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dañoPlayer = GetComponent<AudioSource>();
 
         animator = GetComponent<Animator>();
     }
@@ -74,6 +78,9 @@ public class playerController : MonoBehaviour
             
             UpdateState("PlayerDamage");
             contador++;
+
+            dañoPlayer.clip = daño;
+            dañoPlayer.Play();
             
             if(contador != 0) {
                 string actualizar = "TouchLife" + contador;

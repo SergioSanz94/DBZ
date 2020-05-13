@@ -20,12 +20,19 @@ public class GameController : MonoBehaviour
     public GameObject EnemyGenertor2;
     public GameObject EnemyGenertor;
 
+    // audio
+    public AudioClip fondo;
+    public AudioClip die;
+    AudioSource musicPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         uiGOver.SetActive(false);
         life.SetActive(false);
         buttom.SetActive(false);
+
+        musicPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -43,6 +50,9 @@ public class GameController : MonoBehaviour
             player.SendMessage("UpdateState", "PlayerRun");
             EnemyGenertor.SendMessage("StartGenerator1");
             EnemyGenertor2.SendMessage("StartGenerator2");
+
+            musicPlayer.clip = fondo;
+            musicPlayer.Play();
           
            
         }
@@ -52,13 +62,17 @@ public class GameController : MonoBehaviour
         }
          else if(gameState == GameState.GameOver) 
         {
+           
+
             destroyer2.SetActive(true);
             player.SetActive(false);
             life.SetActive(false);
             buttom.SetActive(false);
             EnemyGenertor.SendMessage("CancelGenerator1");
             EnemyGenertor2.SendMessage("CancelGenerator2");
-           
+            
+            musicPlayer.clip = die;
+            musicPlayer.Play();
 
         }
         if(gameState == GameState.GameOver && (Input.GetKeyDown("up") || Input.GetMouseButtonDown(0)))
@@ -72,6 +86,9 @@ public class GameController : MonoBehaviour
             player.SendMessage("UpdateState", "PlayerRun");
             EnemyGenertor.SendMessage("StartGenerator1");
             EnemyGenertor2.SendMessage("StartGenerator2");
+
+            musicPlayer.clip = fondo;
+            musicPlayer.Play();
         }
 
     }
